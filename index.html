@@ -4,19 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aria | Curated IPTV Channels</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
-            --bg-color: #f8f9fa;
+            --bg-color: #000000;
             --text-color: #212529;
             --muted-text-color: #6c757d;
-            --border-color: #dee2e6;
-            --accent-color: #0d6efd;
+            --border-color: #6f6f6f;
+            --accent-color: #18bf90;
+            --accent-hover: #3a56d4;
             --header-bg: #ffffff;
+            --card-bg: #ffffff;
             --danger-color: #dc3545;
-            --success-color: #198754;
+            --success-color: #28a745;
             --warning-color: #ffc107;
-            --secondary-bg: #f1f3f4;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
         }
 
         @media (prefers-color-scheme: dark) {
@@ -25,12 +29,12 @@
                 --text-color: #e9ecef;
                 --muted-text-color: #adb5bd;
                 --border-color: #343a40;
-                --accent-color: #4dabf7;
-                --header-bg: #1e1e1e;
+                --accent-color: #006de1;
+                --accent-hover: #4d63d0;
+                --header-bg: #1a1a1a;
+                --card-bg: #1e1e1e;
                 --danger-color: #f06571;
-                --success-color: #51cf66;
-                --warning-color: #ffd43b;
-                --secondary-bg: #2d2d2d;
+                --shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
             }
         }
 
@@ -40,247 +44,175 @@
 
         body {
             margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
-            transition: background-color 0.3s ease, color 0.3s ease;
+            transition: var(--transition);
             line-height: 1.6;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 1rem;
-        }
-
-        @media (min-width: 768px) {
-            .container {
-                padding: 2rem;
-            }
+            padding: 1.5rem;
         }
 
         header {
             text-align: center;
-            margin-bottom: 3rem;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 1.5rem;
-            position: relative;
+            margin-bottom: 2rem;
+            padding: 2rem 0;
+            background: var(--header-bg);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            margin-top: 1rem;
         }
 
         header h1 {
-            font-size: clamp(2rem, 5vw, 3rem);
-            margin: 0;
-            background: linear-gradient(45deg, var(--accent-color), #6f42c1);
+            font-size: 2.8rem;
+            margin: 0 0 0.5rem 0;
+            background: linear-gradient(90deg, var(--accent-color), #6c8eff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-weight: 800;
         }
 
-        .stats-bar {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 0.5rem;
-        }
-
-        .stat-number {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--accent-color);
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
+        .tagline {
+            font-size: 1.2rem;
             color: var(--muted-text-color);
+            margin-bottom: 1.5rem;
         }
 
         .project-info {
-            background: linear-gradient(135deg, var(--header-bg) 0%, var(--secondary-bg) 100%);
-            border: 1px solid var(--border-color);
+            background-color: var(--card-bg);
             border-radius: 12px;
-            padding: 1.5rem;
+            padding: 2rem;
             margin-bottom: 2rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow);
+            border-left: 3px solid #00ff87;
+            border-top: 3px solid #00ff87;
         }
 
-        .project-info h2, .project-info h3 {
+        .project-info h2 {
             margin-top: 0;
+            color: #00ff9f;
+            font-size: 1.8rem;
+        }
+
+        .project-info h3 {
+            color: #00ff9f;
+            margin-top: 1.5rem;
+            font-size: 1.3rem;
         }
 
         .project-info a {
-            color: var(--accent-color);
+            color: #fff;
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.2s ease;
+            transition: var(--transition);
         }
 
         .project-info a:hover {
-            text-decoration: underline;
-            color: var(--success-color);
+            color: #fff;
         }
         
         .playlist-links {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            display: flex;
+            flex-wrap: wrap;
             gap: 1rem;
             margin: 1rem 0;
         }
-
+        
         .playlist-link {
-            display: block;
-            padding: 1rem;
-            background-color: var(--secondary-bg);
-            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            padding: 0.8rem 1.2rem;
+            background-color: var(--bg-color);
             border-radius: 8px;
             text-decoration: none;
-            transition: all 0.2s ease;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: var(--transition);
+            border: 1px solid #00ff9f;
         }
 
         .playlist-link:hover {
+            background-color: #0b6a46;
+            color: white;
+            border-color: #fff;
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-        }
-        
-        .controls-bar {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-            align-items: center;
         }
 
+        .playlist-link i {
+            margin-right: 0.5rem;
+        }
+        
         .search-container {
-            flex: 1;
-            min-width: 250px;
             position: relative;
+            margin-bottom: 2rem;
         }
 
         #search-input {
             width: 100%;
-            padding: 0.75rem 1rem 0.75rem 2.5rem;
+            padding: 1rem 1rem 1rem 3rem;
             font-size: 1rem;
-            border-radius: 25px;
-            border: 2px solid var(--border-color);
-            background-color: var(--header-bg);
+            border-radius: 50px;
+            border: 1px solid var(--border-color);
+            background-color: var(--card-bg);
             color: var(--text-color);
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
         }
 
         #search-input:focus {
             outline: none;
             border-color: var(--accent-color);
-            box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.1);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
         }
 
         .search-icon {
             position: absolute;
-            left: 0.75rem;
+            left: 1rem;
             top: 50%;
             transform: translateY(-50%);
             color: var(--muted-text-color);
-            pointer-events: none;
-        }
-
-        .view-toggle {
-            display: flex;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .view-button {
-            padding: 0.5rem 1rem;
-            background: var(--header-bg);
-            border: none;
-            color: var(--text-color);
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .view-button.active {
-            background: var(--accent-color);
-            color: white;
-        }
-
-        .expand-collapse-buttons {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .action-button {
-            padding: 0.5rem 1rem;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            background: var(--header-bg);
-            color: var(--text-color);
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: all 0.2s ease;
-        }
-
-        .action-button:hover {
-            background: var(--accent-color);
-            color: white;
-            border-color: var(--accent-color);
         }
 
         .category-folder {
-            border: 1px solid var(--border-color);
             border-radius: 12px;
-            margin-bottom: 1rem;
-            background-color: var(--header-bg);
+            margin-bottom: 1.5rem;
+            background-color: var(--card-bg);
+            box-shadow: var(--shadow);
             overflow: hidden;
-            transition: all 0.3s ease;
+            transition: var(--transition);
         }
 
         .category-folder:hover {
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
         }
 
         .category-header {
-            padding: 1rem 1.5rem;
+            padding: 1.2rem 1.5rem;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
             font-size: 1.2rem;
             font-weight: 600;
-            background: linear-gradient(90deg, var(--header-bg) 0%, var(--secondary-bg) 100%);
-            transition: all 0.2s ease;
+            background-color: var(--header-bg);
+            transition: var(--transition);
         }
 
         .category-header:hover {
-            background: var(--secondary-bg);
-        }
-
-        .category-title {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            background-color: rgba(67, 97, 238, 0.05);
         }
 
         .channel-count {
-            background: var(--accent-color);
+            background-color: var(--accent-color);
             color: white;
-            padding: 0.25rem 0.5rem;
-            border-radius: 12px;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
             font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .expand-icon {
-            transition: transform 0.3s ease;
-            font-size: 1.2rem;
-        }
-
-        .expand-icon.expanded {
-            transform: rotate(180deg);
+            margin-left: 0.5rem;
         }
 
         .channel-table {
@@ -289,7 +221,7 @@
         }
         
         .channel-table th, .channel-table td {
-             padding: 0.75rem 1.5rem;
+             padding: 1rem 1.5rem;
              border-top: 1px solid var(--border-color);
              text-align: left;
              vertical-align: middle;
@@ -299,95 +231,124 @@
             font-weight: 600;
             font-size: 0.9rem;
             color: var(--muted-text-color);
-            background-color: var(--secondary-bg);
-        }
-
-        .channel-table tr:hover {
-            background-color: var(--secondary-bg);
+            background-color: var(--header-bg);
         }
         
         .channel-name {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            font-weight: 500;
+            gap: 12px;
         }
-
-        .channel-logo {
+        
+        .channel-icon {
             width: 32px;
-            height: 24px;
-            object-fit: contain;
-            border-radius: 4px;
-            background-color: var(--secondary-bg);
-            border: 1px solid var(--border-color);
-        }
-
-        .logo-fallback {
-            width: 32px;
-            height: 24px;
+            height: 32px;
+            border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(45deg, var(--accent-color), #6f42c1);
-            border-radius: 4px;
-            color: white;
-            font-size: 10px;
             font-weight: bold;
-            text-transform: uppercase;
+            font-size: 14px;
+            flex-shrink: 0;
+            background: linear-gradient(135deg, #2e96bf, #1863f2);
+            color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .channel-icon-img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .channel-icon-fallback {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
         }
         
         .channel-table a {
-             color: var(--accent-color);
+             color: #ff0054;
              text-decoration: none;
              font-weight: 500;
-             transition: color 0.2s ease;
+             transition: var(--transition);
         }
 
         .channel-table a:hover {
-            color: var(--success-color);
-        }
-
-        .status-indicator {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            display: inline-block;
-            margin-right: 0.5rem;
-        }
-
-        .status-stable {
-            background-color: var(--success-color);
-        }
-
-        .status-unstable {
-            background-color: var(--warning-color);
+             color: #000;
         }
 
         .unstable-icon {
             color: var(--warning-color);
-            font-weight: bold;
+            margin-left: 8px;
             cursor: help;
             font-size: 1rem;
         }
 
+        .stream-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.7rem 1rem;
+            background-color: rgba(0, 255, 103, 0.28);
+            border-radius: 150px;
+            color: #ffffff;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+            font-size: inherit;
+        }
+
+        .stream-link:hover {
+            background-color: #000000;
+            color: white;
+        }
+
+        .stream-link.copied {
+            background-color: #000000;
+            color: #00ff9f;
+        }
+
+        .stream-link i {
+            margin-right: 0.4rem;
+            font-size: 0.9rem;
+        }
+
         .report-button {
-            font-size: 0.8rem;
-            padding: 6px 12px;
-            border-radius: 20px;
-            border: 1px solid var(--danger-color);
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1.25rem;
+            border-radius: 250px;
+            border: 1px solid #ff0054;
             background: transparent;
             color: var(--danger-color);
             cursor: pointer;
             text-decoration: none;
-            display: inline-block;
-            transition: all 0.2s ease;
+            transition: var(--transition);
+            font-size: 0.9rem;
         }
 
         .report-button:hover {
-            background: var(--danger-color);
+            background-color: #ff0054;
             color: white;
         }
 
-        .loading-spinner {
+        .report-button i {
+            margin-right: 0.4rem;
+            font-size: 0.9rem;
+        }
+
+        .loading-container {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -397,100 +358,76 @@
         .spinner {
             width: 40px;
             height: 40px;
-            border: 4px solid var(--border-color);
-            border-top: 4px solid var(--accent-color);
+            border: 4px solid rgba(67, 97, 238, 0.1);
             border-radius: 50%;
-            animation: spin 1s linear infinite;
+            border-top-color: var(--accent-color);
+            animation: spin 1s ease-in-out infinite;
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            to { transform: rotate(360deg); }
         }
 
-        .no-results {
+        .empty-state {
             text-align: center;
             padding: 3rem;
             color: var(--muted-text-color);
         }
 
-        .grid-view {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1rem;
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
         }
 
-        .grid-category {
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            background: var(--header-bg);
-            padding: 1rem;
-        }
-
-        .grid-category h3 {
-            margin-top: 0;
-            font-size: 1.1rem;
-        }
-
-        .grid-channels {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .grid-channel {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.5rem;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem 0;
+            color: var(--muted-text-color);
             font-size: 0.9rem;
         }
 
-        .grid-channel-info {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .grid-channel-logo {
-            width: 20px;
-            height: 15px;
-            object-fit: contain;
-            border-radius: 2px;
-        }
-
-        .grid-logo-fallback {
-            width: 20px;
-            height: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(45deg, var(--accent-color), #6f42c1);
-            border-radius: 2px;
-            color: white;
-            font-size: 8px;
-            font-weight: bold;
-        }
-
         @media (max-width: 768px) {
-            .controls-bar {
-                flex-direction: column;
-                align-items: stretch;
+            .container {
+                padding: 1rem;
             }
             
-            .channel-table th:nth-child(n+3),
-            .channel-table td:nth-child(n+3) {
-                display: none;
+            header h1 {
+                font-size: 2.2rem;
             }
             
-            .stats-bar {
-                gap: 1rem;
+            .channel-table th, .channel-table td {
+                padding: 0.75rem 1rem;
             }
             
             .playlist-links {
-                grid-template-columns: 1fr;
+                flex-direction: column;
+            }
+            
+            .channel-icon {
+                width: 28px;
+                height: 28px;
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .category-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+            
+            .channel-table th:nth-child(2),
+            .channel-table td:nth-child(2) {
+                display: none;
+            }
+            
+            .channel-icon {
+                width: 24px;
+                height: 24px;
+                font-size: 10px;
             }
         }
     </style>
@@ -504,12 +441,43 @@
     <div id="root"></div>
 
     <script type="text/babel">
-        const { useState, useEffect, useMemo } = React;
+        const { useState, useEffect } = React;
+
+        // Function to generate a channel icon based on the channel name
+        const generateChannelIcon = (channelName) => {
+            // Extract the first letter of each word for the icon
+            const words = channelName.split(' ');
+            let initials = '';
+            
+            if (words.length === 1) {
+                initials = words[0].charAt(0).toUpperCase();
+            } else {
+                initials = words[0].charAt(0).toUpperCase() + words[1].charAt(0).toUpperCase();
+            }
+            
+            return initials;
+        };
+
+        // Function to generate a color based on the channel name
+        const generateIconColor = (channelName) => {
+            const colors = [
+                '#4361ee', '#3a0ca3', '#7209b7', '#f72585', '#4cc9f0',
+                '#4895ef', '#560bad', '#b5179e', '#f15bb5', '#2ec4b6'
+            ];
+            
+            let hash = 0;
+            for (let i = 0; i < channelName.length; i++) {
+                hash = channelName.charCodeAt(i) + ((hash << 5) - hash);
+            }
+            
+            return colors[Math.abs(hash) % colors.length];
+        };
 
         const parseM3U = (m3uContent, isStable) => {
             const lines = m3uContent.split('\n');
             const channels = {};
-            const regex = /group-title="([^"]+)"/;
+            const countryRegex = /group-title="([^"]+)"/;
+            const logoRegex = /tvg-logo="([^"]*)"/;
 
             for (let i = 0; i < lines.length; i++) {
                 const line = lines[i];
@@ -518,16 +486,16 @@
                         const nextLine = lines[i + 1];
                         if (!nextLine || nextLine.startsWith('#')) continue;
 
-                        const countryMatch = line.match(regex);
+                        const countryMatch = line.match(countryRegex);
                         if (!countryMatch) continue;
                         
                         const country = countryMatch[1].trim();
                         const channelName = line.split(',').pop().trim();
                         const streamUrl = nextLine.trim();
                         
-                        // Extract tvg-logo if present
-                        const logoMatch = line.match(/tvg-logo="([^"]+)"/);
-                        const logoUrl = logoMatch ? logoMatch[1] : null;
+                        // Extract logo if available
+                        const logoMatch = line.match(logoRegex);
+                        const logoUrl = logoMatch && logoMatch[1] ? logoMatch[1].trim() : null;
                         
                         if (!channels[country]) channels[country] = {};
                         
@@ -536,8 +504,9 @@
                                  name: channelName, 
                                  stable: isStable, 
                                  url: streamUrl,
-                                 country: country,
-                                 logo: logoUrl
+                                 logo: logoUrl,
+                                 icon: generateChannelIcon(channelName),
+                                 iconColor: generateIconColor(channelName)
                              };
                         }
                     } catch (e) { console.error("Error parsing line:", line, e); }
@@ -545,41 +514,31 @@
             }
             return channels;
         };
-
-        // Generate logo URL from channel name using multiple sources
-        const generateLogoUrl = (channelName, country) => {
-            // This function is no longer needed since logos come from playlists
-            return null;
-        };
-
-        const ChannelLogo = ({ channel, className = "channel-logo" }) => {
-            const [logoError, setLogoError] = useState(false);
-
-            const handleLogoError = () => {
-                setLogoError(true);
-            };
-
-            // If no logo URL or error occurred, show fallback
-            if (!channel.logo || logoError) {
-                const initials = channel.name.split(' ').map(word => word[0]).join('').substring(0, 2);
+        
+        const ChannelIcon = ({ channel }) => {
+            if (channel.logo) {
                 return (
-                    <div className={className === "channel-logo" ? "logo-fallback" : "grid-logo-fallback"}>
-                        {initials}
-                    </div>
+                    <img 
+                        src={channel.logo} 
+                        alt={channel.name}
+                        className="channel-icon-img"
+                        onError={(e) => {
+                            // If image fails to load, fall back to text icon
+                            e.target.style.display = 'none';
+                            e.target.nextSibling.style.display = 'flex';
+                        }}
+                    />
                 );
             }
-
+            
             return (
-                <img 
-                    src={channel.logo} 
-                    alt={`${channel.name} logo`}
-                    className={className}
-                    onError={handleLogoError}
-                />
+                <div className="channel-icon-fallback" style={{backgroundColor: channel.iconColor}}>
+                    {channel.icon}
+                </div>
             );
         };
         
-        const Category = ({ country, channels, forceOpen, viewMode }) => {
+        const Category = ({ country, channels, forceOpen }) => {
             const [isOpen, setIsOpen] = useState(false);
 
             useEffect(() => {
@@ -600,44 +559,14 @@
                 return `${repoUrl}?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`;
             };
 
-            if (viewMode === 'grid') {
-                return (
-                    <div className="grid-category">
-                        <h3>
-                            <span className="category-title">
-                                {country}
-                                <span className="channel-count">{channels.length}</span>
-                            </span>
-                        </h3>
-                        <div className="grid-channels">
-                            {channels.slice(0, 5).map(channel => (
-                                <div key={channel.name} className="grid-channel">
-                                    <div className="grid-channel-info">
-                                        <ChannelLogo channel={channel} className="grid-channel-logo" />
-                                        <span className={`status-indicator ${channel.stable ? 'status-stable' : 'status-unstable'}`}></span>
-                                        {channel.name}
-                                    </div>
-                                    <a href={channel.url} target="_blank" rel="noopener noreferrer">▶</a>
-                                </div>
-                            ))}
-                            {channels.length > 5 && (
-                                <div style={{textAlign: 'center', color: 'var(--muted-text-color)', fontSize: '0.9rem'}}>
-                                    +{channels.length - 5} more channels
-                                </div>
-                            )}
-                        </div>
-                    </div>
-                );
-            }
-
             return (
                 <div className="category-folder">
                     <div className="category-header" onClick={() => setIsOpen(!isOpen)}>
-                        <div className="category-title">
-                            <span>{country}</span>
+                        <span>
+                            {country}
                             <span className="channel-count">{channels.length}</span>
-                        </div>
-                        <span className={`expand-icon ${isOpen ? 'expanded' : ''}`}>▼</span>
+                        </span>
+                        <span>{isOpen ? <i className="fas fa-chevron-up"></i> : <i className="fas fa-chevron-down"></i>}</span>
                     </div>
                     {isOpen && (
                         <table className="channel-table">
@@ -645,34 +574,12 @@
                                 <tr>
                                     <th>Channel</th>
                                     <th>Stream</th>
-                                    <th>Report</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {channels.map(channel => (
-                                    <tr key={channel.name}>
-                                        <td>
-                                            <div className="channel-name">
-                                                <ChannelLogo channel={channel} />
-                                                <div>
-                                                    <div style={{fontWeight: '500'}}>{channel.name}</div>
-                                                    <div style={{fontSize: '0.8rem', color: 'var(--muted-text-color)'}}>
-                                                        <span className={`status-indicator ${channel.stable ? 'status-stable' : 'status-unstable'}`}></span>
-                                                        {channel.stable ? 'Stable' : 'Unstable'}
-                                                        {!channel.stable && 
-                                                            <span className="unstable-icon" title="Potentially unstable stream from aria+.m3u"> ⚠</span>
-                                                        }
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <a href={channel.url} target="_blank" rel="noopener noreferrer">Play</a>
-                                        </td>
-                                        <td>
-                                            <a href={createReportURL(channel)} target="_blank" rel="noopener noreferrer" className="report-button">Report</a>
-                                        </td>
-                                    </tr>
+                                    <ChannelRow key={channel.name} channel={channel} createReportURL={createReportURL} />
                                 ))}
                             </tbody>
                         </table>
@@ -681,33 +588,109 @@
             );
         };
 
+        const ChannelRow = ({ channel, createReportURL }) => {
+            const [isCopied, setIsCopied] = useState(false);
+            const [showFallbackIcon, setShowFallbackIcon] = useState(!channel.logo);
+
+            const copyToClipboard = async () => {
+                try {
+                    // Modern clipboard API with fallback
+                    if (navigator.clipboard && window.isSecureContext) {
+                        await navigator.clipboard.writeText(channel.url);
+                    } else {
+                        // Fallback for older browsers and insecure contexts
+                        const textArea = document.createElement('textarea');
+                        textArea.value = channel.url;
+                        textArea.style.position = 'fixed';
+                        textArea.style.opacity = '0';
+                        document.body.appendChild(textArea);
+                        textArea.select();
+                        
+                        const successful = document.execCommand('copy');
+                        if (!successful) {
+                            throw new Error('Fallback copy method failed');
+                        }
+                        
+                        document.body.removeChild(textArea);
+                    }
+                    
+                    setIsCopied(true);
+                    setTimeout(() => setIsCopied(false), 2000);
+                } catch (err) {
+                    console.error('Failed to copy text: ', err);
+                    // Optional: Show an error message to the user
+                }
+            };
+
+            return (
+                <tr>
+                    <td>
+                        <div className="channel-name">
+                            <div className="channel-icon">
+                                {!showFallbackIcon ? (
+                                    <img 
+                                        src={channel.logo} 
+                                        alt={channel.name}
+                                        className="channel-icon-img"
+                                        onError={() => setShowFallbackIcon(true)}
+                                    />
+                                ) : null}
+                                {showFallbackIcon ? (
+                                    <div className="channel-icon-fallback" style={{backgroundColor: channel.iconColor}}>
+                                        {channel.icon}
+                                    </div>
+                                ) : null}
+                            </div>
+                            <div>
+                                {channel.name}
+                                {!channel.stable && 
+                                    <span className="unstable-icon" title="Potentially unstable stream from aria+.m3u">
+                                        <i className="fas fa-exclamation-triangle"></i>
+                                    </span>
+                                }
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <button 
+                            onClick={copyToClipboard} 
+                            className={`stream-link ${isCopied ? 'copied' : ''}`}
+                            title="Copy stream URL to clipboard"
+                        >
+                            <i className={`fas ${isCopied ? 'fa-check' : 'fa-link'}`}></i> 
+                            {isCopied ? 'Copied!' : 'Copy Link'}
+                        </button>
+                    </td>
+                    <td>
+                        <a href={createReportURL(channel)} target="_blank" rel="noopener noreferrer" className="report-button">
+                            <i className="fas fa-flag"></i> Report
+                        </a>
+                    </td>
+                </tr>
+            );
+        };
+
         const App = () => {
             const [allChannelData, setAllChannelData] = useState([]);
             const [filteredData, setFilteredData] = useState([]);
             const [searchTerm, setSearchTerm] = useState('');
             const [loading, setLoading] = useState(true);
-            const [viewMode, setViewMode] = useState('list');
-            const [allExpanded, setAllExpanded] = useState(false);
-
-            const stats = useMemo(() => {
-                const totalChannels = allChannelData.reduce((sum, cat) => sum + cat.channels.length, 0);
-                const stableChannels = allChannelData.reduce((sum, cat) => 
-                    sum + cat.channels.filter(ch => ch.stable).length, 0);
-                const countries = allChannelData.length;
-                
-                return { totalChannels, stableChannels, countries };
-            }, [allChannelData]);
+            const [error, setError] = useState(null);
 
             useEffect(() => {
                 const fetchAndParseData = async () => {
                     try {
-                        const [ariaRes, ariaPlusRes] = await Promise.all([ 
-                            fetch('aria.m3u'), 
-                            fetch('aria+.m3u') 
+                        const [ariaRes, ariaPlusRes] = await Promise.all([
+                            fetch('https://aria.bnkd.xyz/aria.m3u'),
+                            fetch('https://aria.bnkd.xyz/aria+.m3u')
                         ]);
-                        const [ariaText, ariaPlusText] = await Promise.all([ 
-                            ariaRes.text(), 
-                            ariaPlusRes.text() 
+                        
+                        if (!ariaRes.ok) throw new Error(`Failed to fetch aria.m3u: ${ariaRes.status}`);
+                        if (!ariaPlusRes.ok) throw new Error(`Failed to fetch aria+.m3u: ${ariaPlusRes.status}`);
+                        
+                        const [ariaText, ariaPlusText] = await Promise.all([
+                            ariaRes.text(),
+                            ariaPlusRes.text()
                         ]);
 
                         const stableChannels = parseM3U(ariaText, true);
@@ -731,7 +714,8 @@
                         setAllChannelData(formattedData);
                         setFilteredData(formattedData);
                     } catch (error) { 
-                        console.error("Could not load channel data:", error); 
+                        console.error("Could not load channel data:", error);
+                        setError(error.message);
                     } finally { 
                         setLoading(false); 
                     }
@@ -748,53 +732,31 @@
                 const filtered = allChannelData
                     .map(category => ({
                         ...category,
-                        channels: category.channels.filter(channel => 
-                            channel.name.toLowerCase().includes(lowercasedFilter) ||
-                            channel.country.toLowerCase().includes(lowercasedFilter)
-                        )
+                        channels: category.channels.filter(channel => channel.name.toLowerCase().includes(lowercasedFilter))
                     }))
                     .filter(category => category.channels.length > 0);
                 setFilteredData(filtered);
             }, [searchTerm, allChannelData]);
 
-            const expandAll = () => setAllExpanded(true);
-            const collapseAll = () => setAllExpanded(false);
 
             return (
                 <div className="container">
                     <header>
                         <h1>Aria</h1>
-                        <p>A curated collection of IPTV channels from around the world.</p>
-                        <div className="stats-bar">
-                            <div className="stat-item">
-                                <div className="stat-number">{stats.totalChannels}</div>
-                                <div className="stat-label">Total Channels</div>
-                            </div>
-                            <div className="stat-item">
-                                <div className="stat-number">{stats.stableChannels}</div>
-                                <div className="stat-label">Stable</div>
-                            </div>
-                            <div className="stat-item">
-                                <div className="stat-number">{stats.countries}</div>
-                                <div className="stat-label">Countries</div>
-                            </div>
-                        </div>
+                        <p className="tagline">A curated collection of IPTV channels from around the world.</p>
                     </header>
                     <main>
                         <div className="project-info">
                             <h2>About Aria</h2>
                             <p>
-                                Aria provides a curated collection of IPTV channels from around the world. The channels are organized by their countries. Unlike our predecessor Mystique, this git is only using official streams, tvheadends, astra control panel among others.
+                                Aria provides a curated collection of IPTV channels from around the world. The channels are organized by their countries. Unlike our predecessor Mystique, this git is only using official streams, tvheadends, astra control panel among others. Also note the warning icons mean that the stream is in Aria+ and may be unstable.
                             </p>
                             <div className="playlist-links">
-                                <h3>Playlist Files</h3>
-                                <a href="./aria.m3u" download className="playlist-link">
-                                    <strong>Download aria.m3u</strong><br />
-                                    <small>Stable Streams</small>
+                                <a href="https://aria.bnkd.xyz/aria.m3u" download className="playlist-link">
+                                    <i className="fas fa-download"></i> Download aria.m3u (Stable)
                                 </a>
-                                <a href="./aria+.m3u" download className="playlist-link">
-                                    <strong>Download aria+.m3u</strong><br />
-                                    <small>Potentially Unstable Streams</small>
+                                <a href="https://aria.bnkd.xyz/aria+.m3u" download className="playlist-link">
+                                    <i className="fas fa-download"></i> Download aria+.m3u (Potentially Unstable)
                                 </a>
                             </div>
                             <h3>Want to help us?</h3>
@@ -804,66 +766,47 @@
                         </div>
 
                         <h2>Channel List</h2>
-                        <div className="controls-bar">
-                            <div className="search-container">
-                                <span className="search-icon">🔍</span>
-                                <input
-                                    id="search-input"
-                                    type="search"
-                                    placeholder="Search for channel or country..."
-                                    value={searchTerm}
-                                    onChange={e => setSearchTerm(e.target.value)}
-                                />
-                            </div>
-                            <div className="view-toggle">
-                                <button 
-                                    className={`view-button ${viewMode === 'list' ? 'active' : ''}`}
-                                    onClick={() => setViewMode('list')}
-                                >
-                                    List
-                                </button>
-                                <button 
-                                    className={`view-button ${viewMode === 'grid' ? 'active' : ''}`}
-                                    onClick={() => setViewMode('grid')}
-                                >
-                                    Grid
-                                </button>
-                            </div>
-                            {viewMode === 'list' && (
-                                <div className="expand-collapse-buttons">
-                                    <button className="action-button" onClick={expandAll}>
-                                        Expand All
-                                    </button>
-                                    <button className="action-button" onClick={collapseAll}>
-                                        Collapse All
-                                    </button>
-                                </div>
-                            )}
+                         <div className="search-container">
+                            <i className="fas fa-search search-icon"></i>
+                            <input
+                                id="search-input"
+                                type="search"
+                                placeholder="Search for a channel..."
+                                value={searchTerm}
+                                onChange={e => setSearchTerm(e.target.value)}
+                            />
                         </div>
-                        
                         {loading ? (
-                            <div className="loading-spinner">
+                            <div className="loading-container">
                                 <div className="spinner"></div>
                             </div>
-                        ) : filteredData.length === 0 ? (
-                            <div className="no-results">
-                                <h3>No Results Found</h3>
-                                <p>No channels were found for your search term "{searchTerm}".</p>
+                        ) : error ? (
+                            <div className="empty-state">
+                                <i className="fas fa-exclamation-triangle"></i>
+                                <h3>Error Loading Data</h3>
+                                <p>{error}</p>
+                                <p>Please check your connection and try again.</p>
                             </div>
+                        ) : filteredData.length > 0 ? (
+                            filteredData.map(category => (
+                                <Category 
+                                    key={category.country} 
+                                    country={category.country} 
+                                    channels={category.channels}
+                                    forceOpen={searchTerm.length > 0}
+                                />
+                            ))
                         ) : (
-                            <div className={viewMode === 'grid' ? 'grid-view' : ''}>
-                                {filteredData.map(category => (
-                                    <Category 
-                                        key={category.country} 
-                                        country={category.country} 
-                                        channels={category.channels}
-                                        forceOpen={searchTerm.length > 0 || allExpanded}
-                                        viewMode={viewMode}
-                                    />
-                                ))}
+                            <div className="empty-state">
+                                <i className="fas fa-tv"></i>
+                                <h3>No channels found</h3>
+                                <p>Try adjusting your search terms</p>
                             </div>
                         )}
                     </main>
+                    <footer>
+                        <p>© {new Date().getFullYear()} Aria IPTV | Curated television streams</p>
+                    </footer>
                 </div>
             );
         };
