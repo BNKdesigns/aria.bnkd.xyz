@@ -1,14 +1,14 @@
 <?php
-// Simple PHP proxy with fallback
-$stream_url = $_GET['channel'];
-$fallback_url = '/channeloffline.mp4';
+// stream_proxy.php
+$channel = $_GET['channel'];
+$fallback = $_GET['fallback'];
 
-// Check if stream is accessible
-$headers = @get_headers($stream_url);
+// Check if primary stream is accessible
+$headers = @get_headers($channel);
 if($headers && strpos($headers[0], '200')) {
-    header("Location: $stream_url");
+    header("Location: $channel");
 } else {
-    header("Location: $fallback_url");
+    header("Location: $fallback");
 }
 exit;
 ?>
